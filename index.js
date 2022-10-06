@@ -28,27 +28,93 @@ app.get('/read/all', async (req, res) => {
       fs.mkdir('txtfiles', { recursive: true }, (err) => {
          if (err) throw err;
       });
+      fs.mkdir('txtfiles/en', { recursive: true }, (err) => {
+         if (err) throw err;
+      });
+      fs.mkdir('txtfiles/es', { recursive: true }, (err) => {
+         if (err) throw err;
+      });
+      fs.mkdir('txtfiles/fr', { recursive: true }, (err) => {
+         if (err) throw err;
+      });
+      fs.mkdir('txtfiles/ja', { recursive: true }, (err) => {
+         if (err) throw err;
+      });
+      fs.mkdir('txtfiles/unknown', { recursive: true }, (err) => {
+         if (err) throw err;
+      });
       
       const confessionsRef = db.collection("Confessions").where("converteds1", "==", "false");
       let responseArr = [];
       let docname = "";
+      let lcode = "";
       confessionsRef.get()
         .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             console.log(doc.id, " => ", doc.data());
             docname = doc.id+doc.data().cdate+".txt";
+            lcode = doc.data().clanguage.lcode;
             console.log("My docname is: ", docname);
+            console.log("Language code is: ", lcode);
             responseArr.push(doc.data());
-               fs.writeFile('txtfiles/'+docname, doc.data().ctext, (err) => {
-               if (err)
+              if (lcode == "en"){
+                  fs.writeFile('txtfiles/en/'+docname, doc.data().ctext, (err) => {
+                  if (err)
                    console.log(err);
                   else {
                       console.log("File written successfully");
                       }
-           });
-           doc.ref.update({
-               converteds1: "true"
-           });
+                 });
+                 doc.ref.update({
+                 converteds1: "true"
+              });              
+              } else if(lcode == "es"){
+                 fs.writeFile('txtfiles/es/'+docname, doc.data().ctext, (err) => {
+                  if (err)
+                   console.log(err);
+                  else {
+                      console.log("File written successfully");
+                      }
+                 });
+                 doc.ref.update({
+                 converteds1: "true"
+              }); 
+              } else if(lcode == "fr"){
+                 fs.writeFile('txtfiles/fr/'+docname, doc.data().ctext, (err) => {
+                  if (err)
+                   console.log(err);
+                  else {
+                      console.log("File written successfully");
+                      }
+                 });
+                 doc.ref.update({
+                 converteds1: "true"
+              }); 
+              } else if(lcode == "ja") {
+                 fs.writeFile('txtfiles/ja/'+docname, doc.data().ctext, (err) => {
+                  if (err)
+                   console.log(err);
+                  else {
+                      console.log("File written successfully");
+                      }
+                 });
+                 doc.ref.update({
+                 converteds1: "true"
+              });                  
+              } else if (lcode == "unknown"){
+                  fs.writeFile('txtfiles/unknown/'+docname, doc.data().ctext, (err) => {
+                   if (err)
+                   console.log(err);
+                   else {
+                      console.log("File written successfully");
+                      }
+                 });
+                 doc.ref.update({
+                 converteds1: "true"
+              }); 
+              } else {
+                 console.log("Language code is not selected: ", lcode);
+              }
         });
         res.send(responseArr);
     })
