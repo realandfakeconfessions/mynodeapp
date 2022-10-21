@@ -9,16 +9,17 @@ set -o pipefail
 # the script converts that file txt into a file.wav.
 
 # If tts is not installed, exit the script and do nothing
-tts=`command -v tts >/dev/null 2>&1 || { echo >&2 "Mozilla tts not found. Install it first."; exit 2; }`
+#tts=`command -v tts >/dev/null 2>&1 || { echo >&2 "Mozilla tts not found. Install it first."; exit 2; }`
 
-parentPath=`pwd`
+source $HOME/temp/ttsenvcoqui/bin/activate
 
-echo -n "Write the two letters of a language (English (en), Spanish (es), French (fr), Japanese (ja)): "
-read LANGUAGE
-echo "You wrote: $LANGUAGE"
+parentPath=/home/opalencia/GithubProjects/realconfessions/backend/mynodeapp
 
-echo "Write your file's name exactly as you saved it including the .txt extension: "
-read fileName
+#echo "Write your file's name exactly as you saved it including the .txt extension: "
+#read fileName
+
+LANGUAGE="$1"
+fileName="$2"
 
 # Remove the filename spaces
 fileName2=`echo "$fileName" | sed 's/ //g'`
@@ -86,7 +87,7 @@ exec > >(tee -i ${logFile}) 2>&1
 echo "Original name: $fileName"
 echo "Current path: $parentPath"
 
-fileExist="$parentPath"/txtfiles/"$fileName"
+fileExist="$parentPath"/txtfiles/"$LANGUAGE"/"$fileName"
 
 # Check if file is empty or doesn't exist
 if [ ! -s "$fileExist" ] || [ ! -f "$fileExist" ]; then
@@ -112,6 +113,9 @@ else
         n=$((n+1))
      done <<< "$fileContent"
      # End while
+     # Create a hidden folder to save the already converted file
+     mkdir -vp "$parentPath"/txtfiles/"$LANGUAGE"/.converted
+     mv -v "$parentPath"/txtfiles/"$LANGUAGE"/"$fileName" "$parentPath"/txtfiles/"$LANGUAGE"/.converted
 fi
 echo "This script stopped in exit: $?"
 # exit with success
