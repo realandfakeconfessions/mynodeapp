@@ -15,9 +15,6 @@ source $HOME/temp/ttsenvcoqui/bin/activate
 
 parentPath=/home/opalencia/GithubProjects/realconfessions/backend/mynodeapp
 
-#echo "Write your file's name exactly as you saved it including the .txt extension: "
-#read fileName
-
 LANGUAGE="$1"
 fileName="$2"
 
