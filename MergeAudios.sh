@@ -24,8 +24,9 @@ while read line; do
           confession=$line
           nwavs=`ls "$parentPath"/audios/"$language"/"$confession" | wc -l`
            if [ "$nwavs" -gt 1 ]; then
+           mkdir -vp "$HOME"/.cmerged
            # Create a log by each audio created
-           logFile="$HOME"/."$confession".log
+           logFile="$HOME"/.cmerged/."$confession".log
            exec > >(tee -i ${logFile}) 2>&1
              echo "$confession""#wavs:""$nwavs"
              wavlist=`ls -A "$parentPath"/audios/"$language"/"$confession" | sort -n`
@@ -45,7 +46,7 @@ while read line; do
           nwavs=`ls "$parentPath"/audios/"$language"/"$confession" | wc -l`
           if [ "$nwavs" -gt 1 ]; then
           # Create a log by each audio created
-          logFile="$HOME"/."$confession".log
+          logFile="$HOME"/.cmerged/."$confession".log
           exec > >(tee -i ${logFile}) 2>&1
              echo "$confession""#wavs:""$nwavs"
              wavlist=`ls -A "$parentPath"/audios/"$language"/"$confession" | sort -n`
@@ -65,7 +66,7 @@ while read line; do
           nwavs=`ls "$parentPath"/audios/"$language"/"$confession" | wc -l`
           if [ "$nwavs" -gt 1 ]; then
           # Create a log by each audio created
-          logFile="$HOME"/."$confession".log
+          logFile="$HOME"/.cmerged/."$confession".log
           exec > >(tee -i ${logFile}) 2>&1
              echo "$confession""#wavs:""$nwavs"
              wavlist=`ls -A "$parentPath"/audios/"$language"/"$confession" | sort -n`
@@ -85,7 +86,7 @@ while read line; do
           nwavs=`ls "$parentPath"/audios/"$language"/"$confession" | wc -l`
           if [ "$nwavs" -gt 1 ]; then
           # Create a log by each audio created
-          logFile="$HOME"/."$confession".log
+          logFile="$HOME"/.cmerged/."$confession".log
           exec > >(tee -i ${logFile}) 2>&1
              echo "$confession""#wavs:""$nwavs"
              wavlist=`ls -A "$parentPath"/audios/"$language"/"$confession" | sort -n`

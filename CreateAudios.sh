@@ -3,10 +3,9 @@
 set -e 
 set -o pipefail
 
-# Create audio files with mozilla Text to Speech (TTS)
-# The user writes the name of the file in txt format
-# (which must be saved near this script) and then
-# the script converts that file txt into a file.wav.
+# Create audio files with mozilla Text to Speech (TTS).
+# This script creates a .wav file from a .txt file.
+# The process is automatic.
 
 # If tts is not installed, exit the script and do nothing
 #tts=`command -v tts >/dev/null 2>&1 || { echo >&2 "Mozilla tts not found. Install it first."; exit 2; }`

@@ -53,7 +53,7 @@ app.get('/read/all', async (req, res) => {
         querySnapshot.forEach((doc) => {
             console.log(doc.id, " => ", doc.data());
             docname = doc.id+doc.data().cdate+".txt";
-            lcode = doc.data().clanguage.lcode;
+            lcode = doc.data().clanguage;
             console.log("My docname is: ", docname);
             console.log("Language code is: ", lcode);
             responseArr.push(doc.data());
