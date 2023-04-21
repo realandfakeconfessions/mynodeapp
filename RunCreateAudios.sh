@@ -3,7 +3,7 @@
 set -e 
 set -o pipefail
 
-parentPath=/home/opalencia/GithubProjects/realconfessions/backend/mynodeapp
+parentPath=/home/opalencia/GithubProjects/realconfessions/mynodeapp
 
 mydir=`dir "$parentPath"/txtfiles -1`
 

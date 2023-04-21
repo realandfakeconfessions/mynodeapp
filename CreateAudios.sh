@@ -12,7 +12,7 @@ set -o pipefail
 
 source $HOME/temp/ttsenvcoqui/bin/activate
 
-parentPath=/home/opalencia/GithubProjects/realconfessions/backend/mynodeapp
+parentPath=/home/opalencia/GithubProjects/realconfessions/mynodeapp
 
 LANGUAGE="$1"
 fileName="$2"
